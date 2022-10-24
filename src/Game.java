@@ -55,14 +55,17 @@ public class Game {
 			int roll=die.nextInt(6)+1;
 			String spin = spinner.spin();
 			System.out.println(roll+ " "+ spin);
-			
-			if(roll == LOSER_ROLL){
-				System.out.println("Lose a turn.");
-				return 0;
-			}
-			else if(spin == LOSER_SPIN.toUpperCase()){
+
+			//else if(spin == LOSER_SPIN.toUpperCase()){
+			// 6. to compare strings you must use equal
+			// 7. Reordered so that it will check for GRUNT first and lose all points
+			if(spin.equals(LOSER_SPIN.toUpperCase())){
 				System.out.println("Too bad!  Lose all your points.");
 				whoseTurn.resetScore();
+				return 0;
+			}
+			else if(roll == LOSER_ROLL){
+				System.out.println("Lose a turn.");
 				return 0;
 			}
 			else{
