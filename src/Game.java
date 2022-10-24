@@ -9,8 +9,8 @@ public class Game {
 	private final int LOSER_ROLL = 1;
 	
 	public Game(){
-		Player player1 = new GUIPlayer();
-		Player player2 = new ComputerPlayer();
+		player1 = new GUIPlayer();
+		player2 = new ComputerPlayer();
 		die = new Random();
 		spinner = new Spinner();
 	}
@@ -47,8 +47,12 @@ public class Game {
 		int roundScore = 0;
 		boolean keepGoing = true;
 		printStartRoundMessage(whoseTurn);
-		while(keepGoing){
-			int roll = die.nextInt(7);
+		//while(keepGoing){
+		// 4. only checks for winner after each round, new code will check after each turn
+		while(keepGoing && !winner()){
+			//int roll = die.nextInt(7);
+			// 3. die.nextInt(7) gives numbers from 0-6, die.nextInt(6) will give numbers from (0+1)-(5+1) so 1-6
+			int roll=die.nextInt(6)+1;
 			String spin = spinner.spin();
 			System.out.println(roll+ " "+ spin);
 			
@@ -72,7 +76,9 @@ public class Game {
 	
 	// True if one of the players has won the game.
 	public boolean winner(){
-		return player1.hasWon() && player2.hasWon();
+		//return player1.hasWon() && player2.hasWon();
+		// 1. there is never an instance where both players will have won
+		return player1.hasWon() || player2.hasWon();
 	}
 	
 	/* 
